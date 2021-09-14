@@ -1,0 +1,17 @@
+.home {
+  padding: 3rem;
+}
+
+/* tab screen 900px */
+@media (max-width: 56.25em) {
+  .home {
+    padding: 5rem 10rem;
+  }
+}
+
+/* phone screen 600px */
+@media (max-width: 37.5em) {
+  .home {
+    padding: 2rem 5rem;
+  }
+}

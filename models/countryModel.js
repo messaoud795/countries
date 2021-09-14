@@ -1,0 +1,13 @@
+const mongoose = require("mongoose");
+const countrySchema = new mongoose.Schema({
+  flag: { type: String, required: true },
+  name: { type: String, required: true, unique: true },
+  capital: { type: String, required: true },
+  population: { type: Number, required: true },
+  currency: { type: String, required: true },
+  timeZone: { type: String, required: true },
+});
+
+module.exports = mongoose.model("Country", countrySchema);
+
+// name, capital, population, currency, timeZone;

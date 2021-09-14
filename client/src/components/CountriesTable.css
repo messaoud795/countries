@@ -1,0 +1,38 @@
+.countriesTable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.countriesTable th,
+.countriesTable td {
+  border: 1px solid #ddd;
+  padding: 0.8rem;
+  font-size: 1.6rem;
+  width: 10rem;
+}
+/* set the width of the first column */
+.countriesTable td:nth-child(n),
+th:first-child {
+  width: 2rem;
+}
+
+.countriesTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.countriesTable tr:hover {
+  background-color: #ddd;
+}
+
+.countriesTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #255d83;
+  color: white;
+}
+
+.country_img {
+  width: 3.5rem;
+}
