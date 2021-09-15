@@ -1,0 +1,30 @@
+.EditIcon {
+  color: chartreuse;
+  cursor: pointer;
+  margin-right: 1rem;
+  font-size: 2rem !important;
+}
+#form-dialog-title {
+  padding-bottom: 0rem;
+}
+#form-dialog-title h2 {
+  font-size: 2rem !important;
+}
+.ModalEdit__form {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 2fr)) !important;
+  grid-column-gap: 1.5rem;
+  grid-row-gap: 1.5rem;
+  width: 50rem;
+  border-bottom: rgb(184, 178, 178) solid 1px;
+  border-top: rgb(184, 178, 178) solid 1px;
+  padding: 2rem 0;
+  font-size: 3rem !important;
+}
+.ModalEdit__input input {
+  font-size: 1.6rem !important;
+}
+.ModalEdit__Btn {
+  font-size: 1.5rem !important;
+  margin-right: 1rem !important;
+}

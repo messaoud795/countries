@@ -1,62 +1,136 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
+import React, { useState } from "react";
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
+import "./ModalEdit.css";
+import { editCountry } from "../actions/country_actions";
+import { useDispatch } from "react-redux";
 
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-}));
-
-export default function ModalEdit() {
-  const classes = useStyles();
+export default function ModalEdit({
+  data: { _id, flag, name, capital, currency, timeZone, population },
+}) {
   const [open, setOpen] = React.useState(false);
+  const [data, setData] = useState({
+    _id,
+    flag,
+    name,
+    capital,
+    currency,
+    timeZone,
+    population,
+  });
+  const dispatch = useDispatch();
 
-  const handleOpen = () => {
+  const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
   };
+  function handleSubmit(e) {
+    dispatch(editCountry(data));
+    handleClose();
+  }
 
   return (
-    <div>
-      <EditIcon type="button" onClick={handleOpen}>
+    <div className="ModalEdit">
+      <EditIcon type="button" onClick={handleClickOpen} className="EditIcon">
         react-transition-group
       </EditIcon>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
+      <Dialog
         open={open}
         onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
+        aria-labelledby="form-dialog-title"
       >
-        <Fade in={open}>
-          <div className={classes.paper}>
-            <h2 id="transition-modal-title">Transition modal</h2>
-            <p id="transition-modal-description">
-              react-transition-group animates me.
-            </p>
-          </div>
-        </Fade>
-      </Modal>
+        <DialogTitle id="form-dialog-title">
+          Edit country informations
+        </DialogTitle>
+        <DialogContent>
+          <form
+            autoComplete="off"
+            className="ModalEdit__form"
+            // onSubmit={handleSubmit}
+          >
+            <TextField
+              label="flag"
+              variant="outlined"
+              className="ModalEdit__input"
+              value={data.flag}
+              onChange={(event) =>
+                setData({ ...data, flag: event.target.value })
+              }
+            />
+            <TextField
+              label="name"
+              variant="outlined"
+              className="ModalEdit__input"
+              value={data.name}
+              onChange={(event) =>
+                setData({ ...data, name: event.target.value })
+              }
+            />
+            <TextField
+              label="capital"
+              variant="outlined"
+              className="ModalEdit__input"
+              value={data.capital}
+              onChange={(event) =>
+                setData({ ...data, capital: event.target.value })
+              }
+            />
+            <TextField
+              label="population"
+              variant="outlined"
+              className="ModalEdit__input"
+              value={data.population}
+              onChange={(event) =>
+                setData({ ...data, population: event.target.value })
+              }
+            />
+            <TextField
+              label="currency"
+              variant="outlined"
+              className="ModalEdit__input"
+              value={data.currency}
+              onChange={(event) =>
+                setData({ ...data, currency: event.target.value })
+              }
+            />
+            <TextField
+              label="timeZone"
+              variant="outlined"
+              className="ModalEdit__input"
+              value={data.timeZone}
+              onChange={(event) =>
+                setData({ ...data, timeZone: event.target.value })
+              }
+            />
+          </form>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={handleClose}
+            color="primary"
+            className="ModalEdit__Btn"
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleSubmit}
+            color="primary"
+            className="ModalEdit__Btn"
+          >
+            Submit
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

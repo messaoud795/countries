@@ -4,12 +4,19 @@ import App from "./App";
 import { Provider } from "react-redux";
 import { configureStore } from "./store/configureStore";
 import reportWebVitals from "./reportWebVitals";
+import "react-redux-toastr/lib/css/react-redux-toastr.min.css";
 import "./index.css";
+import ReduxToastr from "react-redux-toastr";
 
 const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
+    <ReduxToastr
+      position="bottom-right"
+      transitionIn="fadeIn"
+      transitionOut="fadeOut"
+    />
     <App />
   </Provider>,
   document.getElementById("root")

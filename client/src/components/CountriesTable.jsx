@@ -1,41 +1,26 @@
-import React, { useEffect } from "react";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableFooter from "@material-ui/core/TableFooter";
-import TablePagination from "@material-ui/core/TablePagination";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-
-import TableHead from "@material-ui/core/TableHead";
-import TablePaginationActions from "./TablePaginationActions";
-import { loadCountries } from "../actions/country_actions";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableFooter,
+  TablePagination,
+  TableRow,
+  Paper,
+  TableHead,
+  TableSortLabel,
+} from "@material-ui/core";
 import "./CountriesTable.css";
-import { TableSortLabel } from "@material-ui/core";
 import ModalEdit from "./ModalEdit";
+import ModalDelete from "./ModalDelete";
+var _ = require("lodash");
 
-export default function CountriesTable() {
-  const dispatch = useDispatch();
-  //api request to get the countries from the back end
-  useEffect(() => {
-    dispatch(loadCountries());
-  }, [dispatch]);
-  const { countries } = useSelector((state) => state.country);
-
+export default function CountriesTable({ columns, countries }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [order, setOrder] = React.useState();
   const [orderBy, setOrderBy] = React.useState();
-  const columns = [
-    { id: "flag", label: "flag", disableSorting: true },
-    { id: "name", label: "name" },
-    { id: "capital", label: "capital" },
-    { id: "population", label: "population" },
-    { id: "currency", label: "currency" },
-    { id: "timezone", label: "timezone" },
-  ];
 
   //chnage the page
   const handleChangePage = (event, newPage) => {
@@ -51,39 +36,13 @@ export default function CountriesTable() {
     const isAsc = cellId === orderBy && "asc" === order;
     //toggle to desc if it is asc
     setOrder(isAsc ? "desc" : "asc");
-    console.log({ order, orderBy });
     setOrderBy(cellId);
   };
-  function descendingComparator(a, b, orderBy) {
-    if (b[orderBy] < a[orderBy]) {
-      return -1;
-    }
-    if (b[orderBy] > a[orderBy]) {
-      return 1;
-    }
-    return 0;
-  }
-  function getComparator(order, orderBy) {
-    return order === "desc"
-      ? (a, b) => descendingComparator(a, b, orderBy)
-      : (a, b) => -descendingComparator(a, b, orderBy);
-  }
-
-  function stableSort(array, comparator) {
-    const stabilizedThis = array.map((el, index) => [el, index]);
-    stabilizedThis.sort((a, b) => {
-      const order = comparator(a[0], b[0]);
-      if (order !== 0) return order;
-      return a[1] - b[1];
-    });
-    return stabilizedThis.map((el) => el[0]);
-  }
 
   //handle countries data after sorting and paging
   const DataAfterSortingAndPaging = (rows) => {
-    console.log(stableSort(rows, getComparator(order, orderBy)));
     return rowsPerPage > 0
-      ? stableSort(rows, getComparator(order, orderBy)).slice(
+      ? _.orderBy(rows, orderBy, order).slice(
           page * rowsPerPage,
           page * rowsPerPage + rowsPerPage
         )
@@ -128,8 +87,9 @@ export default function CountriesTable() {
               <TableCell>{row.population}</TableCell>
               <TableCell>{row.currency}</TableCell>
               <TableCell>{row.timeZone}</TableCell>
-              <TableCell>
-                <ModalEdit />
+              <TableCell className="countriesTable__actions">
+                <ModalEdit data={row} />
+                <ModalDelete id={row._id} />
               </TableCell>
             </TableRow>
           ))}
@@ -143,7 +103,6 @@ export default function CountriesTable() {
               page={page}
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
             />
           </TableRow>
         </TableFooter>
