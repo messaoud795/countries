@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+
 import {
   Button,
   TextField,
@@ -12,18 +14,17 @@ import "./ModalEdit.css";
 import { editCountry } from "../actions/country_actions";
 import { useDispatch } from "react-redux";
 
-export default function ModalEdit({
-  data: { _id, flag, name, capital, currency, timeZone, population },
-}) {
-  const [open, setOpen] = React.useState(false);
+export default function ModalEdit({ row }) {
+  const [open, setOpen] = useState(false);
+
   const [data, setData] = useState({
-    _id,
-    flag,
-    name,
-    capital,
-    currency,
-    timeZone,
-    population,
+    _id: row._id,
+    // flag: row.flag,
+    name: row.name,
+    capital: row.capital,
+    currency: row.currency,
+    timeZone: row.timeZone,
+    population: row.population,
   });
   const dispatch = useDispatch();
 
@@ -34,7 +35,7 @@ export default function ModalEdit({
   const handleClose = () => {
     setOpen(false);
   };
-  function handleSubmit(e) {
+  function handleSubmit() {
     dispatch(editCountry(data));
     handleClose();
   }
@@ -58,7 +59,7 @@ export default function ModalEdit({
             className="ModalEdit__form"
             // onSubmit={handleSubmit}
           >
-            <TextField
+            {/* <TextField
               label="flag"
               variant="outlined"
               className="ModalEdit__input"
@@ -66,7 +67,7 @@ export default function ModalEdit({
               onChange={(event) =>
                 setData({ ...data, flag: event.target.value })
               }
-            />
+            /> */}
             <TextField
               label="name"
               variant="outlined"
@@ -134,3 +135,7 @@ export default function ModalEdit({
     </div>
   );
 }
+
+ModalEdit.propTypes = {
+  row: PropTypes.object,
+};

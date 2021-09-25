@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const countrySchema = new mongoose.Schema({
-  flag: { type: String, required: true },
+  flag: { type: String },
   name: { type: String, required: true, unique: true },
   capital: { type: String, required: true },
   population: { type: Number, required: true },

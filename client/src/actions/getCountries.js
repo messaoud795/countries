@@ -11,6 +11,8 @@ export async function getCountries() {
       timeZone: el.timezones[0],
       population: el.population,
     }));
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 }
 export default getCountries;

@@ -2,14 +2,15 @@
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
+  text-align: left;
 }
 /*set table header and cells propreties*/
 .countriesTable td {
   border: 1px solid #ddd;
-  padding: 0.8rem;
   font-size: 1.6rem;
   width: 10rem;
   text-align: center;
+  padding: 0.8rem !important;
 }
 /* set the width of the first column */
 .countriesTable td:nth-child(n),
@@ -33,7 +34,6 @@ th:last-child {
   padding-bottom: 1.2rem;
   background-color: #255d83;
   color: white;
-  text-align: center;
   font-size: 1.6rem;
   border: 1px solid #ddd;
 }
@@ -47,4 +47,11 @@ th:last-child {
   justify-content: center !important;
   width: 100% !important;
   border: 0 !important;
+}
+.countriesTable__input {
+  border: none;
+  width: 85%;
+  background-color: transparent;
+  padding: 0.4rem !important;
+  font-size: inherit;
 }

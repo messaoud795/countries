@@ -6,6 +6,8 @@ import {
   COUNTRY_ADD_SUCCESS,
   COUNTRY_DELETE_SUCCESS,
   COUNTRY_EDIT_SUCCESS,
+  ADD_ROW,
+  SAVE_ROW,
 } from "./actionTypes";
 import { toastr } from "react-redux-toastr";
 
@@ -64,4 +66,12 @@ export const deleteCountry = (CountryId) => {
       toastr.info("Operation not completed", "Country data not deleted ");
     }
   };
+};
+
+export const addRow = (dispatch) => {
+  return dispatch({ type: ADD_ROW });
+};
+
+export const saveRow = (dispatch) => {
+  return dispatch({ type: SAVE_ROW });
 };

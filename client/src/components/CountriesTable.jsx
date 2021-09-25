@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import {
   Table,
   TableBody,
@@ -12,17 +13,17 @@ import {
   TableSortLabel,
 } from "@material-ui/core";
 import "./CountriesTable.css";
-import ModalEdit from "./ModalEdit";
-import ModalDelete from "./ModalDelete";
+
+import TableRows from "./TableRows";
 var _ = require("lodash");
 
 export default function CountriesTable({ columns, countries }) {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [order, setOrder] = React.useState();
-  const [orderBy, setOrderBy] = React.useState();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [order, setOrder] = useState();
+  const [orderBy, setOrderBy] = useState();
 
-  //chnage the page
+  //change the page
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -73,26 +74,7 @@ export default function CountriesTable({ columns, countries }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {DataAfterSortingAndPaging(countries).map((row) => (
-            <TableRow key={row.name}>
-              <TableCell>
-                <img
-                  src={row.flag}
-                  className="country_img"
-                  alt="country flag"
-                />
-              </TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.capital}</TableCell>
-              <TableCell>{row.population}</TableCell>
-              <TableCell>{row.currency}</TableCell>
-              <TableCell>{row.timeZone}</TableCell>
-              <TableCell className="countriesTable__actions">
-                <ModalEdit data={row} />
-                <ModalDelete id={row._id} />
-              </TableCell>
-            </TableRow>
-          ))}
+          <TableRows data={DataAfterSortingAndPaging(countries)} />
         </TableBody>
         <TableFooter>
           <TableRow>
@@ -110,3 +92,9 @@ export default function CountriesTable({ columns, countries }) {
     </TableContainer>
   );
 }
+
+CountriesTable.propTypes = {
+  columns: PropTypes.array,
+  countries: PropTypes.array,
+  isLineSaved: PropTypes.bool,
+};

@@ -12,8 +12,10 @@
   position: absolute !important;
   top: 50% !important;
   left: 50% !important;
-
   transform: translate(-50%, -50%) !important;
+}
+.homePage__addBtn {
+  margin: 0 0 2rem 90% !important;
 }
 
 /* tab screen 900px */

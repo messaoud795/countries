@@ -10,15 +10,15 @@ exports.countries_list = (req, res) => {
 
 //create a new Country
 exports.create_country = async (req, res) => {
+  console.log(req.body)
   try {
-    const { name, capital, population, currency, timeZone, flag } = req.body;
+    const { name, capital, population, currency, timeZone } = req.body;
     const newCountry = new Country({
       name,
       capital,
       population,
       currency,
       timeZone,
-      flag,
     });
     await newCountry.save();
     res.status(200).send({ msg: "Country created successfully" });
