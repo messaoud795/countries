@@ -1,22 +1,20 @@
 import React, { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import "./CountriesTable.css";
-import ModalDelete from "./ModalDelete";
-import ModalEdit from "./ModalEdit";
+
 import { useSelector } from "react-redux";
 import { TableCell, TableRow } from "@material-ui/core";
-import ModalAdd from "./ModalAdd";
+import ModalEdit from "./Modals/ModalEdit";
+import ModalDelete from "./Modals/ModalDelete";
+import ModalAddCol from "./Modals/ModalAddCol";
+import ModalAddRow from "./Modals/ModalAddRow";
+import { initialData } from "../helpers/setColumns";
 
 export default function TableLine({ country, keys, index }) {
   const refs = useRef([React.createRef()]);
   const { newRow } = useSelector((state) => state.country);
-  const [inputsData, setInputsData] = useState({
-    name: "",
-    capital: "",
-    currency: "",
-    timeZone: "",
-    population: "",
-  });
+
+  const [inputsData, setInputsData] = useState(initialData(keys));
 
   useEffect(() => {
     if (refs.current[0].current && newRow) {
@@ -51,9 +49,10 @@ export default function TableLine({ country, keys, index }) {
       ))}
       <TableCell>
         {index === 0 && newRow ? (
-          <ModalAdd data={inputsData} />
+          <ModalAddRow data={inputsData} />
         ) : (
           <div className="countriesTable__actions">
+            <ModalAddCol row={country} headers={keys} />
             <ModalEdit row={country} />
             <ModalDelete id={country._id} />
           </div>

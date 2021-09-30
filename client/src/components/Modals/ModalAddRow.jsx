@@ -1,6 +1,6 @@
 import React from "react";
 import SaveIcon from "@material-ui/icons/Save";
-import { addCountry, saveRow } from "../actions/country_actions";
+import { addCountry, saveRow } from "../../actions/country_actions";
 import {
   Button,
   Dialog,
@@ -11,7 +11,7 @@ import {
 import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 
-export default function ModalAdd({ data }) {
+export default function ModalAddRow({ data }) {
   const [open, setOpen] = React.useState(false);
 
   const dispatch = useDispatch();
@@ -23,6 +23,7 @@ export default function ModalAdd({ data }) {
   const handleClose = () => {
     setOpen(false);
   };
+
   function handleSubmit() {
     dispatch(addCountry(data));
     saveRow(dispatch);
@@ -67,6 +68,6 @@ export default function ModalAdd({ data }) {
     </div>
   );
 }
-ModalAdd.propTypes = {
+ModalAddRow.propTypes = {
   data: PropTypes.object,
 };

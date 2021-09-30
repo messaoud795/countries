@@ -6,6 +6,7 @@ const countrySchema = new mongoose.Schema({
   population: { type: Number, required: true },
   currency: { type: String, required: true },
   timeZone: { type: String, required: true },
+  addColumns: [{ fieldName: String, fieldValue: String }],
 });
 
 module.exports = mongoose.model("Country", countrySchema);

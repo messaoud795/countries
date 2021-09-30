@@ -24,6 +24,12 @@ export async function countryEditReq(data, dispatch) {
   dispatch({ type: COUNTRY_EDIT_SUCCESS });
 }
 
+export async function addCountryFieldReq(data, dispatch) {
+  dispatch({ type: COUNTRY_ACTION_START });
+  await axios.patch("/api/country/editCol", data);
+  dispatch({ type: COUNTRY_EDIT_SUCCESS });
+}
+
 export async function countryDeleteReq(CountryId, dispatch) {
   dispatch({ type: COUNTRY_ACTION_START });
   await axios.delete(`/api/country/delete/${CountryId}`);
