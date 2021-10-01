@@ -10,15 +10,15 @@ exports.countries_list = (req, res) => {
 
 //create a new Country
 exports.create_country = async (req, res) => {
+  console.log(req.body)
   try {
-    const { name, capital, population, currency, timeZone, flag } = req.body;
+    const { name, capital, population, currency, timeZone } = req.body;
     const newCountry = new Country({
       name,
       capital,
       population,
       currency,
       timeZone,
-      flag,
     });
     await newCountry.save();
     res.status(200).send({ msg: "Country created successfully" });
@@ -28,10 +28,10 @@ exports.create_country = async (req, res) => {
   }
 };
 
-//update an Country
+//update a Country record
 exports.update_country = (req, res) => {
   Country.findByIdAndUpdate(
-    req.body.id,
+    req.body._id,
     { ...req.body },
     { new: true, runValidators: true },
     (err, data) => {
@@ -43,7 +43,7 @@ exports.update_country = (req, res) => {
   );
 };
 
-//delete an Country
+//delete a Country
 exports.delete_country = (req, res) => {
   Country.findByIdAndDelete(req.params.id, (err) => {
     if (err) res.status(500).send({ msg: "error" });
