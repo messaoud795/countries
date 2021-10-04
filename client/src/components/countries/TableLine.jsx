@@ -4,11 +4,11 @@ import "./CountriesTable.css";
 
 import { useSelector } from "react-redux";
 import { TableCell, TableRow } from "@material-ui/core";
-import ModalEdit from "./Modals/ModalEdit";
-import ModalDelete from "./Modals/ModalDelete";
-import ModalAddCol from "./Modals/ModalAddCol";
-import ModalAddRow from "./Modals/ModalAddRow";
-import { initialData } from "../helpers/setColumns";
+import ModalEdit from "../Modals/ModalEdit";
+import ModalDelete from "../Modals/ModalDelete";
+import ModalAddCol from "../Modals/ModalAddCol";
+import ModalAddRow from "../Modals/ModalAddRow";
+import { initialData } from "../../helpers/setColumns";
 
 export default function TableLine({ country, keys, index }) {
   const refs = useRef([React.createRef()]);

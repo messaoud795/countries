@@ -9,7 +9,6 @@ import ReduxToastr from "react-redux-toastr";
 import "./index.css";
 
 const store = configureStore();
-
 ReactDOM.render(
   <Provider store={store}>
     <ReduxToastr

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./HomePage.css";
-import CountriesTable from "../components/CountriesTable";
+import CountriesTable from "../components/countries/CountriesTable";
 import { useDispatch, useSelector } from "react-redux";
 import { addRow, loadCountries } from "../actions/country_actions";
 import { Button, CircularProgress } from "@material-ui/core";
 import { setTableHeaders } from "../helpers/setColumns";
+import { useHistory } from "react-router";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ export default function HomePage() {
     dispatch(loadCountries());
   }, [dispatch]);
   const { countries, loadingAction } = useSelector((state) => state.country);
+  const history = useHistory();
   const [localCountriesData, setLocalCountriesData] = useState(countries);
   let initialHeaders = [
     { id: "name", label: "name" },
@@ -44,6 +46,7 @@ export default function HomePage() {
   return (
     <div className="home">
       <h1 className="home__title"> Countries Browser</h1>
+      <button onClick={() => history.push("/matrix")}>Matrix page</button>
       {loadingAction ? (
         <CircularProgress className="homePage__spinner" />
       ) : (

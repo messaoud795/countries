@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import {
@@ -16,10 +16,9 @@ import { useDispatch } from "react-redux";
 
 export default function ModalEdit({ row }) {
   const [open, setOpen] = useState(false);
-
+  const [keys, setKeys] = useState(null);
   const [data, setData] = useState({
     _id: row._id,
-    // flag: row.flag,
     name: row.name,
     capital: row.capital,
     currency: row.currency,
@@ -27,6 +26,10 @@ export default function ModalEdit({ row }) {
     population: row.population,
   });
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setKeys(Object.keys(row));
+  }, [row]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -54,65 +57,20 @@ export default function ModalEdit({ row }) {
           Edit country informations
         </DialogTitle>
         <DialogContent>
-          <form
-            autoComplete="off"
-            className="ModalEdit__form"
-            // onSubmit={handleSubmit}
-          >
-            {/* <TextField
-              label="flag"
-              variant="outlined"
-              className="ModalEdit__input"
-              value={data.flag}
-              onChange={(event) =>
-                setData({ ...data, flag: event.target.value })
-              }
-            /> */}
-            <TextField
-              label="name"
-              variant="outlined"
-              className="ModalEdit__input"
-              value={data.name}
-              onChange={(event) =>
-                setData({ ...data, name: event.target.value })
-              }
-            />
-            <TextField
-              label="capital"
-              variant="outlined"
-              className="ModalEdit__input"
-              value={data.capital}
-              onChange={(event) =>
-                setData({ ...data, capital: event.target.value })
-              }
-            />
-            <TextField
-              label="population"
-              variant="outlined"
-              className="ModalEdit__input"
-              value={data.population}
-              onChange={(event) =>
-                setData({ ...data, population: event.target.value })
-              }
-            />
-            <TextField
-              label="currency"
-              variant="outlined"
-              className="ModalEdit__input"
-              value={data.currency}
-              onChange={(event) =>
-                setData({ ...data, currency: event.target.value })
-              }
-            />
-            <TextField
-              label="timeZone"
-              variant="outlined"
-              className="ModalEdit__input"
-              value={data.timeZone}
-              onChange={(event) =>
-                setData({ ...data, timeZone: event.target.value })
-              }
-            />
+          <form autoComplete="off" className="ModalEdit__form">
+            {keys?.slice(2, keys.length - 2).map((key, i) => (
+              <TextField
+                key={i}
+                label={key}
+                name={key}
+                variant="outlined"
+                className="ModalEdit__input"
+                value={data[name]}
+                onChange={(event) =>
+                  setData({ ...data, [event.target.name]: event.target.value })
+                }
+              />
+            ))}
           </form>
         </DialogContent>
         <DialogActions>

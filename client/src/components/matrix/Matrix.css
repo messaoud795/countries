@@ -1,0 +1,19 @@
+.matrix {
+  border-collapse: collapse;
+}
+.matrix th {
+  background-color: #255d83;
+  color: white;
+  font-size: 1.6rem;
+  border: 1px solid black;
+  width: 8rem;
+  height: 5rem;
+}
+.matrix td {
+  border: 1px solid black;
+  font-size: 1.6rem;
+  text-align: center;
+  width: 8rem;
+  height: 5rem;
+  font-weight: 700;
+}

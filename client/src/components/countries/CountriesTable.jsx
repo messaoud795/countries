@@ -15,7 +15,7 @@ import {
 import "./CountriesTable.css";
 import { orderBy as lodashOrderBy } from "lodash";
 import TableLine from "./TableLine";
-import { setCountry } from "../helpers/setCountry";
+import { setCountry } from "../../helpers/setCountry";
 
 export default function CountriesTable({ columns, countries }) {
   const [page, setPage] = useState(0);
