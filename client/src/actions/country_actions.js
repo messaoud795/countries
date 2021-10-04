@@ -1,23 +1,20 @@
-import axios from "axios";
-import {
-  COUNTRY_ACTION_START,
-  COUNTRY_ACTION_ERROR,
-  COUNTRY_LOAD_SUCCESS,
-  COUNTRY_ADD_SUCCESS,
-  COUNTRY_DELETE_SUCCESS,
-  COUNTRY_EDIT_SUCCESS,
-  ADD_ROW,
-  SAVE_ROW,
-} from "./actionTypes";
+/* eslint-disable */
+import { COUNTRY_ACTION_ERROR, ADD_ROW, SAVE_ROW } from "./actionTypes";
 import { toastr } from "react-redux-toastr";
+import {
+  addCountryFieldReq,
+  countryAddReq,
+  countryDeleteReq,
+  countryEditReq,
+  countryLoadReq,
+} from "./endPoints";
 
 //add a country: reload countries in case of success  or show an error message
 export const addCountry = (data) => {
   return async (dispatch) => {
     try {
-      dispatch({ type: COUNTRY_ACTION_START });
-      await axios.post("/api/country/add", data);
-      dispatch({ type: COUNTRY_ADD_SUCCESS });
+      countryAddReq(data, dispatch);
+      toastr.success("success", "country added successfully");
       dispatch(loadCountries());
     } catch (error) {
       dispatch({ type: COUNTRY_ACTION_ERROR, payload: error });
@@ -28,9 +25,7 @@ export const addCountry = (data) => {
 export const loadCountries = () => {
   return async (dispatch) => {
     try {
-      dispatch({ type: COUNTRY_ACTION_START });
-      const { data } = await axios.get("/api/country/");
-      dispatch({ type: COUNTRY_LOAD_SUCCESS, payload: data });
+      countryLoadReq(dispatch);
     } catch (error) {
       dispatch({ type: COUNTRY_ACTION_ERROR, payload: error });
     }
@@ -40,11 +35,8 @@ export const loadCountries = () => {
 export const editCountry = (data) => {
   return async (dispatch) => {
     try {
-      dispatch({ type: COUNTRY_ACTION_START });
-      await axios.patch("/api/country/edit", data);
-      dispatch({ type: COUNTRY_EDIT_SUCCESS });
+      countryEditReq(data, dispatch);
       toastr.success("Success", "Country data updated successfully");
-
       dispatch(loadCountries());
     } catch (error) {
       dispatch({ type: COUNTRY_ACTION_ERROR, payload: error });
@@ -52,13 +44,25 @@ export const editCountry = (data) => {
     }
   };
 };
+//add a field
+export const addCountryField = (data) => {
+  return async (dispatch) => {
+    try {
+      addCountryFieldReq(data, dispatch);
+      toastr.success("Success", "Country data updated successfully");
+      dispatch(loadCountries());
+    } catch (error) {
+      dispatch({ type: COUNTRY_ACTION_ERROR, payload: error });
+      toastr.error("Error", "Country data is not updated ");
+    }
+  };
+};
+
 //delete an action: reload actions in case of success  or show an error message
 export const deleteCountry = (CountryId) => {
   return async (dispatch) => {
     try {
-      dispatch({ type: COUNTRY_ACTION_START });
-      await axios.delete(`/api/country/delete/${CountryId}`);
-      dispatch({ type: COUNTRY_DELETE_SUCCESS });
+      countryDeleteReq(CountryId, dispatch);
       dispatch(loadCountries());
       toastr.info("Operation completed", "Country data deleted ");
     } catch (error) {

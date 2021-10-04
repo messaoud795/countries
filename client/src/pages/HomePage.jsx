@@ -4,6 +4,7 @@ import CountriesTable from "../components/CountriesTable";
 import { useDispatch, useSelector } from "react-redux";
 import { addRow, loadCountries } from "../actions/country_actions";
 import { Button, CircularProgress } from "@material-ui/core";
+import { setTableHeaders } from "../helpers/setColumns";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -13,19 +14,20 @@ export default function HomePage() {
   }, [dispatch]);
   const { countries, loadingAction } = useSelector((state) => state.country);
   const [localCountriesData, setLocalCountriesData] = useState(countries);
-
-  useEffect(() => {
-    setLocalCountriesData(countries);
-  }, [countries]);
-
-  const columns = [
-    // { id: "flag", label: "flag", disableSorting: true },
+  let initialHeaders = [
     { id: "name", label: "name" },
     { id: "capital", label: "capital" },
     { id: "population", label: "population" },
     { id: "currency", label: "currency" },
-    { id: "timezone", label: "timezone" },
+    { id: "timeZone", label: "timeZone" },
   ];
+  const [columns, setColumns] = useState(initialHeaders);
+
+  useEffect(() => {
+    setLocalCountriesData(countries);
+    setColumns(setTableHeaders(countries, initialHeaders));
+  }, [countries]);
+
   const addNewLine = () => {
     const newLine = {
       flag: undefined,

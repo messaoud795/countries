@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import "./ModalEdit.css";
-import { editCountry } from "../actions/country_actions";
+import { editCountry } from "../../actions/country_actions";
 import { useDispatch } from "react-redux";
 
 export default function ModalEdit({ row }) {

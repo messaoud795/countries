@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import "./ModalDelete.css";
-import { deleteCountry } from "../actions/country_actions";
+import { deleteCountry } from "../../actions/country_actions";
 import { useDispatch } from "react-redux";
 
 export default function ModalDelete({ id }) {

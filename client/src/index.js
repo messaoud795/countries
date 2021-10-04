@@ -5,8 +5,8 @@ import { Provider } from "react-redux";
 import { configureStore } from "./store/configureStore";
 import reportWebVitals from "./reportWebVitals";
 import "react-redux-toastr/lib/css/react-redux-toastr.min.css";
-import "./index.css";
 import ReduxToastr from "react-redux-toastr";
+import "./index.css";
 
 const store = configureStore();
 
