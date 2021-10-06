@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./MatrixPage.css";
 import { Button } from "@material-ui/core";
-import Matrix from "../components/matrix/Matrix";
+import Matrix from "../components/matrix/Matrix.tsx";
 
 export default function MatrixPage() {
   const colorsSelection = ["#6F69AC", "#95DAC1", "#FFEBA1"];
@@ -24,6 +24,7 @@ export default function MatrixPage() {
     <div className="matrixPage">
       <div className="matrixPage__header">
         <h1>Select multiple matrix cells color</h1>
+
         <div className="matrixPage__colorSelector">
           <div
             style={{

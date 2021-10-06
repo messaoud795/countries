@@ -10,7 +10,7 @@ class MatrixLine extends Component {
   }
 
   componentDidUpdate() {
-    console.log("Line updated", this.props.index);
+    // console.log("Line updated", this.props.index);
   }
   shouldComponentUpdate(nextProps) {
     let isLineSelected = false;
@@ -43,12 +43,12 @@ class MatrixLine extends Component {
       let selected = selectedKeys.indexOf(index * 10 + j) > -1;
       if (selected && cellColor !== "gray") cellColor = colorSelected;
       return (
-        <td key={index * 10 + j}>
-          <MatrixCell
-            selected={selected}
-            selectableKey={index * 10 + j}
-            color={cellColor}
-          />
+        <td
+          key={j + index * 10}
+          data-key={j + index * 10}
+          className="selectable"
+        >
+          <MatrixCell color={cellColor} index={j + index * 10} />
         </td>
       );
     });
