@@ -5,9 +5,9 @@
 }
 .matrixPage__header {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   margin-bottom: 5rem;
-  width: 80%;
+  width: 100%;
   position: relative;
 }
 
@@ -15,7 +15,8 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-  left: 74%;
+  margin-right: 2rem !important;
+  left: 58vw;
   top: 3rem;
   z-index: 10;
 }
@@ -29,6 +30,8 @@
   border: solid 2px rgba(201, 196, 196, 0.753);
 }
 
-.MatrixPage__reset {
-  margin-top: 3rem !important;
+.MatrixPage__resetBtn {
+  position: absolute;
+  left: 48vw;
+  top: 3rem;
 }

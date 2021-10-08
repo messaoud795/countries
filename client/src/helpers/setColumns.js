@@ -1,22 +1,19 @@
-import { isEmpty } from "lodash";
-
-export const setTableHeaders = (countries, predifinedHeaders) => {
-  let addedHeaders = [];
-  let i = 0;
+export const setTableHeaders = (countries) => {
+  let columns = Object.keys(countries[0]).slice(1);
+  let i = 1;
   for (i; i < countries.length; i++) {
-    if (!isEmpty(countries[i].addColumns)) {
-      countries[i].addColumns.map((el) =>
-        addedHeaders.push({ id: el.fieldName, label: el.fieldName })
-      );
-    }
+    let keys = Object.keys(countries[i]).slice(1);
+    keys.map((key) => {
+      if (columns.indexOf(key) === -1) columns.push(key);
+    });
   }
-  return predifinedHeaders.concat(addedHeaders);
+
+  return columns.map((column) => ({ id: column, label: column }));
 };
 
+//set the inputs data for the add country modal
 export const initialData = (keys) => {
   let x = {};
-  for (let i in keys) {
-    x[keys[i]] = " ";
-  }
+  keys.map((key) => (x[key] = " "));
   return x;
 };

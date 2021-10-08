@@ -8,10 +8,6 @@ class MatrixLine extends Component {
   constructor(props) {
     super(props);
   }
-
-  componentDidUpdate() {
-    // console.log("Line updated", this.props.index);
-  }
   shouldComponentUpdate(nextProps) {
     let isLineSelected = false;
     let wasLineSelected = false;

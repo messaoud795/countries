@@ -15,7 +15,6 @@ import {
 import "./CountriesTable.css";
 import { orderBy as lodashOrderBy } from "lodash";
 import TableLine from "./TableLine";
-import { setCountry } from "../../helpers/setCountry";
 
 export default function CountriesTable({ columns, countries }) {
   const [page, setPage] = useState(0);
@@ -77,11 +76,8 @@ export default function CountriesTable({ columns, countries }) {
           {DataAfterSortingAndPaging(countries).map((country, index) => (
             <TableLine
               key={index}
-              country={setCountry(
-                columns.map((col) => col.label),
-                country
-              )}
-              keys={columns.map((col) => col.label)}
+              country={country}
+              columns={columns.map((col) => col.label)}
               index={index}
             />
           ))}

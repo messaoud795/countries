@@ -11,6 +11,11 @@ export default function Matrix(props: any) {
   const [selected, setSelected] = useState<Set<number>>(() => new Set());
 
   useEffect(() => {
+    setReset(false);
+  }, [selected]);
+
+  //if reset btn is clicked initialize the selection of matrix cells
+  useEffect(() => {
     if (reset) setSelected(() => new Set());
   }, [reset]);
 
@@ -20,6 +25,7 @@ export default function Matrix(props: any) {
       .filter(Boolean)
       .map(Number);
 
+  //clear selcetion when starting a new one
   const onStart = ({ event, selection }: SelectionEvent) => {
     if (!event?.ctrlKey && !event?.metaKey) {
       selection.clearSelection();
@@ -27,6 +33,7 @@ export default function Matrix(props: any) {
     }
   };
 
+  //when selecting, we set the selected set with the data-key of the cells selected
   const onMove = ({
     store: {
       changed: { added, removed },
@@ -36,7 +43,6 @@ export default function Matrix(props: any) {
       const next = new Set(prev);
       extractIds(added).forEach((id) => next.add(id));
       extractIds(removed).forEach((id) => next.delete(id));
-      setReset(false);
       return next;
     });
   };

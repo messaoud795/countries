@@ -2,7 +2,6 @@
 import { COUNTRY_ACTION_ERROR, ADD_ROW, SAVE_ROW } from "./actionTypes";
 import { toastr } from "react-redux-toastr";
 import {
-  addCountryFieldReq,
   countryAddReq,
   countryDeleteReq,
   countryEditReq,
@@ -36,19 +35,6 @@ export const editCountry = (data) => {
   return async (dispatch) => {
     try {
       countryEditReq(data, dispatch);
-      toastr.success("Success", "Country data updated successfully");
-      dispatch(loadCountries());
-    } catch (error) {
-      dispatch({ type: COUNTRY_ACTION_ERROR, payload: error });
-      toastr.error("Error", "Country data is not updated ");
-    }
-  };
-};
-//add a field
-export const addCountryField = (data) => {
-  return async (dispatch) => {
-    try {
-      addCountryFieldReq(data, dispatch);
       toastr.success("Success", "Country data updated successfully");
       dispatch(loadCountries());
     } catch (error) {

@@ -11,7 +11,6 @@ export default function MatrixPage() {
   const headers = " abcdefghij".toUpperCase().split("");
 
   useEffect(() => {}, [colorSelected]);
-  console.log(reset);
   //dispath action to reset the background color
   const handleReset = (event) => {
     event.preventDefault();
@@ -24,7 +23,6 @@ export default function MatrixPage() {
     <div className="matrixPage">
       <div className="matrixPage__header">
         <h1>Select multiple matrix cells color</h1>
-
         <div className="matrixPage__colorSelector">
           <div
             style={{
@@ -49,7 +47,7 @@ export default function MatrixPage() {
         <Button
           variant="contained"
           onClick={handleReset}
-          className="MatrixPage__reset"
+          className="MatrixPage__resetBtn"
         >
           Reset
         </Button>

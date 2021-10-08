@@ -12,7 +12,6 @@ class MatrixCell extends React.PureComponent {
   }
   componentDidUpdate() {
     this.Caseref.current.style.backgroundColor = this.props.color;
-    console.log("cell updated");
   }
 
   render() {

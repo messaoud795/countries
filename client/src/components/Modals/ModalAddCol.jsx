@@ -12,19 +12,17 @@ import {
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import "./ModalEdit.css";
 import { useDispatch } from "react-redux";
-import { addCountryField } from "../../actions/country_actions";
-import { isEmpty } from "lodash";
+import { editCountry } from "../../actions/country_actions";
+import { isEmpty, capitalize } from "lodash";
 
 export default function ModalAddCol({ row, headers }) {
   const [open, setOpen] = useState(false);
-
   const [data, setData] = useState({
     _id: row._id,
     fieldName: "",
     fieldValue: "",
   });
   const dispatch = useDispatch();
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -36,12 +34,18 @@ export default function ModalAddCol({ row, headers }) {
     //validate that the fieled name is not equal to any of the headers
     if (isEmpty(data.fieldName) || isEmpty(data.fieldValue)) return;
     for (let i in headers) {
-      if (headers[i] === data.fieldName) {
+      if (headers[i].toLowerCase() === data.fieldName.toLowerCase()) {
         alert("field name already exists");
         return;
       }
     }
-    dispatch(addCountryField(data));
+    //add the id to data and country data to the new added field
+    let newData = { id: row._id };
+    delete row._id;
+    newData[data.fieldName] = data.fieldValue;
+    newData = { ...newData, ...row };
+    //dispatch an edit request
+    dispatch(editCountry(newData));
     handleClose();
   }
 
@@ -70,7 +74,10 @@ export default function ModalAddCol({ row, headers }) {
               className="ModalEdit__input"
               value={data.fieldName}
               onChange={(event) =>
-                setData({ ...data, fieldName: event.target.value })
+                setData({
+                  ...data,
+                  fieldName: event.target.value.toLowerCase(),
+                })
               }
             />
             <TextField
@@ -79,7 +86,7 @@ export default function ModalAddCol({ row, headers }) {
               className="ModalEdit__input"
               value={data.fieldValue}
               onChange={(event) =>
-                setData({ ...data, fieldValue: event.target.value })
+                setData({ ...data, fieldValue: capitalize(event.target.value) })
               }
             />
           </form>

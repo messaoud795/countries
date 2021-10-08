@@ -13,24 +13,23 @@ import EditIcon from "@material-ui/icons/Edit";
 import "./ModalEdit.css";
 import { editCountry } from "../../actions/country_actions";
 import { useDispatch } from "react-redux";
+import { capitalize } from "lodash";
 
-export default function ModalEdit({ row }) {
+export default function ModalEdit({ row, columns }) {
   const [open, setOpen] = useState(false);
-  const [keys, setKeys] = useState(null);
-  const [data, setData] = useState({
-    _id: row._id,
-    name: row.name,
-    capital: row.capital,
-    currency: row.currency,
-    timeZone: row.timeZone,
-    population: row.population,
-  });
   const dispatch = useDispatch();
+  let initialInputsObject = { id: row._id };
 
+  //initialInputsObject contains the keys equals to headers of the table
+  //and the value of the country data if it's not undefined
   useEffect(() => {
-    setKeys(Object.keys(row));
+    columns.map((column) => {
+      if (row[column] === undefined) initialInputsObject[column] = "";
+      else initialInputsObject[column] = row[column];
+    });
   }, [row]);
 
+  const [data, setData] = useState(initialInputsObject);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -58,16 +57,19 @@ export default function ModalEdit({ row }) {
         </DialogTitle>
         <DialogContent>
           <form autoComplete="off" className="ModalEdit__form">
-            {keys?.slice(2, keys.length - 2).map((key, i) => (
+            {columns.map((column, i) => (
               <TextField
                 key={i}
-                label={key}
-                name={key}
+                label={column}
+                name={column}
                 variant="outlined"
                 className="ModalEdit__input"
-                value={data[name]}
+                value={data[column]}
                 onChange={(event) =>
-                  setData({ ...data, [event.target.name]: event.target.value })
+                  setData({
+                    ...data,
+                    [event.target.name]: capitalize(event.target.value),
+                  })
                 }
               />
             ))}
@@ -96,4 +98,5 @@ export default function ModalEdit({ row }) {
 
 ModalEdit.propTypes = {
   row: PropTypes.object,
+  columns: PropTypes.array,
 };

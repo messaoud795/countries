@@ -25,6 +25,18 @@ export default function ModalAddRow({ data }) {
   };
 
   function handleSubmit() {
+    let i = 0;
+    for (let key in data) {
+      if (data[key].length > 2) {
+        i++;
+        continue;
+      } else {
+        if (i < 3) {
+          alert("please enter at least the first three fields");
+          return;
+        }
+      }
+    }
     dispatch(addCountry(data));
     saveRow(dispatch);
     handleClose();
