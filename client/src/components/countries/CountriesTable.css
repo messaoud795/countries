@@ -8,9 +8,9 @@
 .countriesTable td {
   border: 1px solid #ddd;
   font-size: 1.6rem;
-  width: 10rem;
+  width: max-content;
   text-align: center;
-  padding: 0.8rem !important;
+  padding: 0.8rem;
 }
 /* set the width of the first column */
 .countriesTable td:nth-child(n),
@@ -36,6 +36,7 @@ th:last-child {
   color: white;
   font-size: 1.6rem;
   border: 1px solid #ddd;
+  width: max-content;
 }
 
 .country_img {

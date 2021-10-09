@@ -1,6 +1,6 @@
 import React from "react";
-import SaveIcon from "@material-ui/icons/Save";
-import { addCountry, saveRow } from "../actions/country_actions";
+import PropTypes from "prop-types";
+
 import {
   Button,
   Dialog,
@@ -8,10 +8,12 @@ import {
   DialogContent,
   DialogTitle,
 } from "@material-ui/core";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
+import "./ModalDelete.css";
+import { deleteCountry } from "../../actions/country_actions";
 import { useDispatch } from "react-redux";
-import PropTypes from "prop-types";
 
-export default function ModalAdd({ data }) {
+export default function ModalDelete({ id }) {
   const [open, setOpen] = React.useState(false);
 
   const dispatch = useDispatch();
@@ -24,27 +26,26 @@ export default function ModalAdd({ data }) {
     setOpen(false);
   };
   function handleSubmit() {
-    dispatch(addCountry(data));
-    saveRow(dispatch);
+    dispatch(deleteCountry(id));
     handleClose();
   }
 
   return (
     <div className="ModalEdit">
-      <SaveIcon
+      <HighlightOffIcon
         type="button"
         onClick={handleClickOpen}
-        style={{ color: "green" }}
+        className="deleteIcon"
       >
         react-transition-group
-      </SaveIcon>
+      </HighlightOffIcon>
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">
-          Add country informations
+          Delete country informations
         </DialogTitle>
         <DialogContent></DialogContent>
         <DialogActions>
@@ -67,6 +68,6 @@ export default function ModalAdd({ data }) {
     </div>
   );
 }
-ModalAdd.propTypes = {
-  data: PropTypes.object,
+ModalDelete.propTypes = {
+  id: PropTypes.string,
 };

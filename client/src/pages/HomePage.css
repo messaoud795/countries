@@ -1,4 +1,4 @@
-.home {
+.homePage {
   padding: 5rem;
 }
 .home__title {
@@ -14,8 +14,17 @@
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
 }
+.homePage__matrixBtn {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: 3rem !important;
+  font-size: 1.2rem !important;
+  letter-spacing: 2px !important ;
+}
 .homePage__addBtn {
-  margin: 0 0 2rem 90% !important;
+  margin: 0 0 2rem 85% !important;
+  font-size: 1.2rem !important;
+  letter-spacing: 2px !important ;
 }
 
 /* tab screen 900px */
