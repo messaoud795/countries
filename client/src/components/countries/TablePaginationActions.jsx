@@ -79,7 +79,7 @@ export default function TablePaginationActions(props) {
 
 TablePaginationActions.propTypes = {
   count: PropTypes.number.isRequired,
-  onPageChange: PropTypes.func.isRequired,
-  page: PropTypes.number.isRequired,
-  rowsPerPage: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func,
+  page: PropTypes.number,
+  rowsPerPage: PropTypes.number,
 };

@@ -1,0 +1,37 @@
+.matrixPage {
+  padding: 4rem 8rem;
+  display: block;
+  margin: 0 auto;
+}
+.matrixPage__header {
+  display: flex;
+  /* justify-content: space-between; */
+  margin-bottom: 5rem;
+  width: 100%;
+  position: relative;
+}
+
+.matrixPage__colorSelector {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin-right: 2rem !important;
+  left: 58vw;
+  top: 3rem;
+  z-index: 10;
+}
+
+.matrixPage__colorSelector * {
+  width: 15rem;
+  height: 2.5rem;
+}
+.matrixPage__colorSelector > :first-child {
+  border-radius: 5px;
+  border: solid 2px rgba(201, 196, 196, 0.753);
+}
+
+.MatrixPage__resetBtn {
+  position: absolute;
+  left: 48vw;
+  top: 3rem;
+}

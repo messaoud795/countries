@@ -38,9 +38,9 @@ export const countryReducer = (state = initialState, action) => {
     case COUNTRY_ACTION_ERROR:
       return (state = { ...state, loadingAction: false, error: payload });
     case ADD_ROW:
-      return (state = { ...state, newRow: true });
+      return (state = { ...state, newRow: payload });
     case SAVE_ROW:
-      return (state = { ...state, newRow: false });
+      return (state = { ...state, newRow: payload });
     default:
       return state;
   }

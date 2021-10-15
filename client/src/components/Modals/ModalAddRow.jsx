@@ -1,6 +1,6 @@
 import React from "react";
-import PropTypes from "prop-types";
-
+import SaveIcon from "@material-ui/icons/Save";
+import { addCountry, saveRow } from "../../actions/country_actions";
 import {
   Button,
   Dialog,
@@ -8,12 +8,10 @@ import {
   DialogContent,
   DialogTitle,
 } from "@material-ui/core";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import "./ModalDelete.css";
-import { deleteCountry } from "../actions/country_actions";
 import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 
-export default function ModalDelete({ id }) {
+export default function ModalAddRow({ data }) {
   const [open, setOpen] = React.useState(false);
 
   const dispatch = useDispatch();
@@ -25,33 +23,50 @@ export default function ModalDelete({ id }) {
   const handleClose = () => {
     setOpen(false);
   };
+
   function handleSubmit() {
-    dispatch(deleteCountry(id));
+    let i = 0;
+    for (let key in data) {
+      if (data[key].length > 2) {
+        i++;
+        continue;
+      } else {
+        if (i < 3) {
+          alert("please enter at least the first three fields");
+          return;
+        }
+      }
+    }
+    dispatch(addCountry(data));
+    dispatch(saveRow());
     handleClose();
   }
 
   return (
-    <div className="ModalEdit">
-      <HighlightOffIcon
+    <div>
+      <SaveIcon
         type="button"
         onClick={handleClickOpen}
-        className="deleteIcon"
+        style={{ color: "green" }}
+        className="modalAddRow__saveBtn"
+        data-testid="saveBtn"
       >
         react-transition-group
-      </HighlightOffIcon>
+      </SaveIcon>
       <Dialog
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">
-          Delete country informations
+          Add country informations
         </DialogTitle>
         <DialogContent></DialogContent>
         <DialogActions>
           <Button
             onClick={handleClose}
-            color="primary"
+            color="secondary"
+            variant="contained"
             className="ModalEdit__Btn"
           >
             Cancel
@@ -59,7 +74,9 @@ export default function ModalDelete({ id }) {
           <Button
             onClick={handleSubmit}
             color="primary"
-            className="ModalEdit__Btn deleteBtn"
+            variant="contained"
+            className="ModalEdit__Btn"
+            data-testid="confirmBtn"
           >
             Confirm
           </Button>
@@ -68,6 +85,6 @@ export default function ModalDelete({ id }) {
     </div>
   );
 }
-ModalDelete.propTypes = {
-  id: PropTypes.string,
+ModalAddRow.propTypes = {
+  data: PropTypes.object,
 };
