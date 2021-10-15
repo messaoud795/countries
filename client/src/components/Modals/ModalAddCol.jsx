@@ -43,15 +43,20 @@ export default function ModalAddCol({ row, headers }) {
     let newData = { id: row._id };
     delete row._id;
     newData[data.fieldName] = data.fieldValue;
-    newData = { ...newData, ...row };
+    newData = { ...row, ...newData };
     //dispatch an edit request
     dispatch(editCountry(newData));
     handleClose();
   }
 
   return (
-    <div className="ModalEdit">
-      <AddBoxIcon type="button" onClick={handleClickOpen} className="EditIcon">
+    <div className="ModalAddCol">
+      <AddBoxIcon
+        type="button"
+        data-testid="addColBtn"
+        onClick={handleClickOpen}
+        className="EditIcon"
+      >
         react-transition-group
       </AddBoxIcon>
       <Dialog

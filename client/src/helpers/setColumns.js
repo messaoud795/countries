@@ -7,7 +7,6 @@ export const setTableHeaders = (countries) => {
       if (columns.indexOf(key) === -1) columns.push(key);
     });
   }
-
   return columns.map((column) => ({ id: column, label: column }));
 };
 

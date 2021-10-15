@@ -2,14 +2,14 @@ import axios from "axios";
 
 export async function getCountries() {
   try {
-    const { data } = await axios.get("https://restcountries.eu/rest/v2/all");
+    const { data } = await axios.get("https://restcountries.com/v2/all");
+    console.log(data);
     return await data.slice(0, 21).map((el) => ({
-      flag: el.flag,
       name: el.name,
-      capital: el.capital,
-      currency: el.currencies[0].name,
-      timeZone: el.timezones[0],
-      population: el.population,
+      area: el.area,
+      region: el.region,
+      latlng: el.latlng.join(" - "),
+      numericCode: el.numericCode,
     }));
   } catch (error) {
     console.log(error);
@@ -17,13 +17,185 @@ export async function getCountries() {
 }
 export default getCountries;
 
-// let initialHeaders = [
-//   { id: "name", label: "name" },
-//   { id: "capital", label: "capital" },
-//   { id: "population", label: "population" },
-//   { id: "currency", label: "currency" },
-//   { id: "timeZone", label: "timeZone" },
-// ];
+export const countriesData = [
+  {
+    id: 0,
+    name: "Afghanistan",
+    area: 652230,
+    region: "Asia",
+    latlng: "33 - 65",
+    numericCode: "004",
+  },
+  {
+    id: 1,
+    name: "Åland Islands",
+    area: 1580,
+    region: "Europe",
+    latlng: "60.116667 - 19.9",
+    numericCode: "248",
+  },
+  {
+    id: 2,
+    name: "Albania",
+    area: 28748,
+    region: "Europe",
+    latlng: "41 - 20",
+    numericCode: "008",
+  },
+  {
+    id: 3,
+    name: "Algeria",
+    area: 2381741,
+    region: "Africa",
+    latlng: "28 - 3",
+    numericCode: "012",
+  },
+  {
+    id: 4,
+    name: "American Samoa",
+    area: 199,
+    region: "Oceania",
+    latlng: "-14.33333333 - -170",
+    numericCode: "016",
+  },
+  {
+    id: 5,
+    name: "Andorra",
+    area: 468,
+    region: "Europe",
+    latlng: "42.5 - 1.5",
+    numericCode: "020",
+  },
+  {
+    id: 6,
+    name: "Angola",
+    area: 1246700,
+    region: "Africa",
+    latlng: "-12.5 - 18.5",
+    numericCode: "024",
+  },
+  {
+    id: 7,
+
+    name: "Anguilla",
+    area: 91,
+    region: "Americas",
+    latlng: "18.25 - -63.16666666",
+    numericCode: "660",
+  },
+  {
+    id: 8,
+
+    name: "Antarctica",
+    area: 14000000,
+    region: "Polar",
+    latlng: "-74.65 - 4.48",
+    numericCode: "010",
+  },
+  {
+    id: 9,
+
+    name: "Antigua and Barbuda",
+    area: 442,
+    region: "Americas",
+    latlng: "17.05 - -61.8",
+    numericCode: "028",
+  },
+  {
+    id: 10,
+
+    name: "Argentina",
+    area: 2780400,
+    region: "Americas",
+    latlng: "-34 - -64",
+    numericCode: "032",
+  },
+  {
+    id: 11,
+
+    name: "Armenia",
+    area: 29743,
+    region: "Asia",
+    latlng: "40 - 45",
+    numericCode: "051",
+  },
+  {
+    id: 12,
+
+    name: "Aruba",
+    area: 180,
+    region: "Americas",
+    latlng: "12.5 - -69.96666666",
+    numericCode: "533",
+  },
+  {
+    id: 13,
+
+    name: "Australia",
+    area: 7692024,
+    region: "Oceania",
+    latlng: "-27 - 133",
+    numericCode: "036",
+  },
+  {
+    id: 14,
+    name: "Austria",
+    area: 83871,
+    region: "Europe",
+    latlng: "47.33333333 - 13.33333333",
+    numericCode: "040",
+  },
+  {
+    id: 15,
+
+    name: "Azerbaijan",
+    area: 86600,
+    region: "Asia",
+    latlng: "40.5 - 47.5",
+    numericCode: "031",
+  },
+  {
+    id: 16,
+
+    name: "Bahamas",
+    area: 13943,
+    region: "Americas",
+    latlng: "24.25 - -76",
+    numericCode: "044",
+  },
+  {
+    id: 17,
+    name: "Bahrain",
+    area: 765,
+    region: "Asia",
+    latlng: "26 - 50.55",
+    numericCode: "048",
+  },
+  {
+    id: 18,
+    name: "Bangladesh",
+    area: 147570,
+    region: "Asia",
+    latlng: "24 - 90",
+    numericCode: "050",
+  },
+  {
+    id: 19,
+    name: "Barbados",
+    area: 430,
+    region: "Americas",
+    latlng: "13.16666666 - -59.53333333",
+    numericCode: "052",
+  },
+  {
+    id: 20,
+    name: "Belarus",
+    area: 207600,
+    region: "Europe",
+    latlng: "53 - 28",
+    numericCode: "112",
+  },
+];
 
 export const data = [
   {

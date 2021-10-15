@@ -31,7 +31,7 @@ export default function ModalDelete({ id }) {
   }
 
   return (
-    <div className="ModalEdit">
+    <div>
       <HighlightOffIcon
         type="button"
         onClick={handleClickOpen}

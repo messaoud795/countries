@@ -58,10 +58,14 @@ export const deleteCountry = (CountryId) => {
   };
 };
 
-export const addRow = (dispatch) => {
-  return dispatch({ type: ADD_ROW });
+export const addRow = (tableNum) => {
+  return (dispatch) =>
+    dispatch({
+      type: ADD_ROW,
+      payload: { newRow: true, tableNum: tableNum },
+    });
 };
 
-export const saveRow = (dispatch) => {
-  return dispatch({ type: SAVE_ROW });
+export const saveRow = () => {
+  return (dispatch) => dispatch({ type: SAVE_ROW, payload: { newRow: false } });
 };

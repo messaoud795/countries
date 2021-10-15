@@ -43,8 +43,12 @@ export default function ModalEdit({ row, columns }) {
   }
 
   return (
-    <div className="ModalEdit">
-      <EditIcon type="button" onClick={handleClickOpen} className="EditIcon">
+    <div className="modalEdit">
+      <EditIcon
+        type="button"
+        onClick={handleClickOpen}
+        className="EditIcon editBtn"
+      >
         react-transition-group
       </EditIcon>
       <Dialog
@@ -61,6 +65,7 @@ export default function ModalEdit({ row, columns }) {
               <TextField
                 key={i}
                 label={column}
+                data-testid={column}
                 name={column}
                 variant="outlined"
                 className="ModalEdit__input"

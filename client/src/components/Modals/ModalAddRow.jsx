@@ -38,16 +38,18 @@ export default function ModalAddRow({ data }) {
       }
     }
     dispatch(addCountry(data));
-    saveRow(dispatch);
+    dispatch(saveRow());
     handleClose();
   }
 
   return (
-    <div className="ModalEdit">
+    <div>
       <SaveIcon
         type="button"
         onClick={handleClickOpen}
         style={{ color: "green" }}
+        className="modalAddRow__saveBtn"
+        data-testid="saveBtn"
       >
         react-transition-group
       </SaveIcon>
@@ -63,7 +65,8 @@ export default function ModalAddRow({ data }) {
         <DialogActions>
           <Button
             onClick={handleClose}
-            color="primary"
+            color="secondary"
+            variant="contained"
             className="ModalEdit__Btn"
           >
             Cancel
@@ -71,7 +74,9 @@ export default function ModalAddRow({ data }) {
           <Button
             onClick={handleSubmit}
             color="primary"
-            className="ModalEdit__Btn deleteBtn"
+            variant="contained"
+            className="ModalEdit__Btn"
+            data-testid="confirmBtn"
           >
             Confirm
           </Button>

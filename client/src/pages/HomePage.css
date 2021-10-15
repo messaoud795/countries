@@ -5,24 +5,11 @@
   margin-bottom: 1.5rem;
   color: green;
 }
-.homePage__spinner {
-  width: 10rem !important;
-  height: 30vh !important;
-  margin: 4rem !important;
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-}
+
 .homePage__matrixBtn {
   display: block !important;
   margin-left: auto !important;
   margin-right: 3rem !important;
-  font-size: 1.2rem !important;
-  letter-spacing: 2px !important ;
-}
-.homePage__addBtn {
-  margin: 0 0 2rem 85% !important;
   font-size: 1.2rem !important;
   letter-spacing: 2px !important ;
 }

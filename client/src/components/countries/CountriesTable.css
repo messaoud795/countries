@@ -1,8 +1,12 @@
+.countriesTableWrapper {
+  position: relative;
+}
 .countriesTable {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
   text-align: left;
+  margin-bottom: 4rem;
 }
 /*set table header and cells propreties*/
 .countriesTable td {
@@ -55,4 +59,20 @@ th:last-child {
   background-color: transparent;
   padding: 0.4rem !important;
   font-size: inherit;
+}
+
+.countriesTable__spinner {
+  width: 10rem !important;
+  height: 30vh !important;
+  margin: 4rem !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+}
+
+.countriesTable__addBtn {
+  margin: 0 0 2rem 85% !important;
+  font-size: 1.2rem !important;
+  letter-spacing: 2px !important ;
 }
