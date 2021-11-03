@@ -24,7 +24,7 @@ export default function HomePage() {
     { id: "capital", label: "capital" },
     { id: "population", label: "population" },
     { id: "currency", label: "currency" },
-    { id: "timezone", label: "timezone" },
+    { id: "timezone", label: "timeZone" },
   ];
   const addNewLine = () => {
     const newLine = {

@@ -13,9 +13,8 @@ import {
   TableSortLabel,
 } from "@material-ui/core";
 import "./CountriesTable.css";
-
-import TableRows from "./TableRows";
-var _ = require("lodash");
+import { orderBy as lodashOrderBy } from "lodash";
+import TableLine from "./TableLine";
 
 export default function CountriesTable({ columns, countries }) {
   const [page, setPage] = useState(0);
@@ -43,7 +42,7 @@ export default function CountriesTable({ columns, countries }) {
   //handle countries data after sorting and paging
   const DataAfterSortingAndPaging = (rows) => {
     return rowsPerPage > 0
-      ? _.orderBy(rows, orderBy, order).slice(
+      ? lodashOrderBy(rows, orderBy, order).slice(
           page * rowsPerPage,
           page * rowsPerPage + rowsPerPage
         )
@@ -74,7 +73,14 @@ export default function CountriesTable({ columns, countries }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          <TableRows data={DataAfterSortingAndPaging(countries)} />
+          {DataAfterSortingAndPaging(countries).map((country, index) => (
+            <TableLine
+              key={index}
+              country={country}
+              keys={columns.map((col) => col.label)}
+              index={index}
+            />
+          ))}
         </TableBody>
         <TableFooter>
           <TableRow>
